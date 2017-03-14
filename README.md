@@ -1,5 +1,5 @@
 # heroku-buildpack-image-optims
-Heroku buildpack for installing Image manipulating libraries such as Jpegoptim and OptiPNG.
+Heroku buildpack for installing Image manipulating libraries such as [Jpegoptim](https://github.com/tjko/jpeginfo) and [OptiPNG](http://optipng.sourceforge.net/).
 
 ## HEROKU SETTINGS
 
