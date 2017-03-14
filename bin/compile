@@ -24,6 +24,8 @@ if $BUILD_IT; then
   mkdir -p $TMP_DIR
 
   cd $TMP_DIR
+
+  echo "Download sources:"
   wget $OPTIPNG_DOWNLOAD_URL
   wget $JPEGOPTIM_DOWNLOAD_URL
 
@@ -33,7 +35,7 @@ if $BUILD_IT; then
   echo "Make OPTIPNG"
   cd optipng-$OPTIPNG_VER
   ./configure
-  make
+  make -s
 
   #back to tmp folder
   cd ../
@@ -41,7 +43,7 @@ if $BUILD_IT; then
   echo "Make JPEGOPTIM"
   cd jpegoptim-$JPEGOPTIM_VER
   ./configure
-  make
+  make -s
 
   cd ../../
 
