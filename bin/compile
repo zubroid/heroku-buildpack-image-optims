@@ -1,0 +1,65 @@
+#!/bin/sh
+
+indent() {
+  sed -u 's/^/       /'
+}
+
+BUILD_DIR=$1
+#root /app
+#Loads variables
+. $BUILD_DIR/image-optimizer-buildpack.config
+echo "-----Is it going to build OptiPNG?-----"
+echo $BUILD_IT
+echo "----------"
+
+if $BUILD_IT; then
+  echo "-----> Installing optipng"
+  VENDOR_DIR="vendor"
+  TMP_DIR="tmp"
+  OPTIPNG_DOWNLOAD_URL="https://downloads.sourceforge.net/project/optipng/OptiPNG/optipng-${OPTIPNG_VER}/optipng-${OPTIPNG_VER}.tar.gz"
+  JPEGOPTIM_DOWNLOAD_URL="http://www.kokkonen.net/tjko/src/jpegoptim-${JPEGOPTIM_VER}.tar.gz"
+
+  cd $BUILD_DIR
+
+  mkdir -p $TMP_DIR
+
+  cd $TMP_DIR
+  wget $OPTIPNG_DOWNLOAD_URL
+  wget $JPEGOPTIM_DOWNLOAD_URL
+
+  tar zxvf "optipng-${OPTIPNG_VER}.tar.gz"
+  tar zxvf "jpegoptim-${JPEGOPTIM_VER}.tar.gz"
+
+  echo "Make OPTIPNG"
+  cd optipng-$OPTIPNG_VER
+  ./configure
+  make
+
+  #back to tmp folder
+  cd ../
+
+  echo "Make JPEGOPTIM"
+  cd jpegoptim-$JPEGOPTIM_VER
+  ./configure
+  make
+
+  cd ../../
+
+  mkdir -p $VENDOR_DIR/optims/bin
+
+  cp $TMP_DIR/optipng-$OPTIPNG_VER/src/optipng/optipng  $VENDOR_DIR/optims/bin/optipng
+  cp $TMP_DIR/jpegoptim-$JPEGOPTIM_VER/jpegoptim  $VENDOR_DIR/optims/bin/jpegoptim
+
+  chmod +x $VENDOR_DIR/optims/bin/optipng
+  chmod +x $VENDOR_DIR/optims/bin/jpegoptim
+
+  #Cleans tmp files
+  rm -R $TMP_DIR
+  
+  echo "exporting PATH" | indent
+  PROFILE_PATH="$BUILD_DIR/.profile.d/optims.sh"
+  mkdir -p $(dirname $PROFILE_PATH)
+  echo 'export PATH="$PATH:vendor/optims/bin"' >> $PROFILE_PATH
+else
+  echo "-----> Not going to nstall optims because config file tells NOT to do it."
+fi
