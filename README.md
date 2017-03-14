@@ -5,13 +5,15 @@ Heroku buildpack for installing Image manipulating libraries such as [Jpegoptim]
 
 The main feature of the buildpack is posibility to change binaries' versions. For that you need to only change version in `image-optimizer-buildpack.config` file (with `BUILD_IT=true` flag).
 
-## HEROKU SETTINGS
+## Getting Started
+
+### Heroku settings
 
 Copy link https://github.com/zubroid/heroku-buildpack-image-optims.git and put it to Settings/Buildpack in Heroku dashboard.
 
 <img width="1300" alt="screen shot 2017-03-14 at 17 01 47" src="https://cloud.githubusercontent.com/assets/2873835/23908508/ea003896-08dc-11e7-80bc-c91799abdae0.png">
 
-## YOUR PROJECT'S CONFIG
+### Config file
 
 Create a config file with `image-optimizer-buildpack.config` name and following content: 
 
@@ -20,6 +22,8 @@ OPTIPNG_VER="0.7.6"
 JPEGOPTIM_VER="1.4.4"
 BUILD_IT=true
 ```
+
+and put it in the root of your project.
 
 ## BUILDPACK CONFIGS
 
