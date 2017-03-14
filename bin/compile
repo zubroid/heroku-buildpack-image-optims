@@ -26,11 +26,11 @@ if $BUILD_IT; then
   cd $TMP_DIR
 
   echo "Download sources:"
-  wget $OPTIPNG_DOWNLOAD_URL
-  wget $JPEGOPTIM_DOWNLOAD_URL
+  wget --progress=bar:force:noscroll  $OPTIPNG_DOWNLOAD_URL
+  wget --progress=bar:force:noscroll  $JPEGOPTIM_DOWNLOAD_URL
 
-  tar zxvf "optipng-${OPTIPNG_VER}.tar.gz"
-  tar zxvf "jpegoptim-${JPEGOPTIM_VER}.tar.gz"
+  tar zxf "optipng-${OPTIPNG_VER}.tar.gz"
+  tar zxf "jpegoptim-${JPEGOPTIM_VER}.tar.gz"
 
   echo "Make OPTIPNG"
   cd optipng-$OPTIPNG_VER
