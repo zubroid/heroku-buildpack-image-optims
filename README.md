@@ -1,5 +1,9 @@
 # heroku-buildpack-image-optims
-Heroku buildpack for installing Image manipulating libraries such as [Jpegoptim](https://github.com/tjko/jpeginfo) and [OptiPNG](http://optipng.sourceforge.net/).
+Heroku buildpack for installing Image manipulating libraries such as [Jpegoptim](https://github.com/tjko/jpeginfo) v1.4.4 and [OptiPNG](http://optipng.sourceforge.net/) v0.7.6.
+
+## Main feature
+
+The main feature of the buildpack is posibility to change binaries' versions. For that you need to only change version in `image-optimizer-buildpack.config` file (with `BUILD_IT=true` flag).
 
 ## HEROKU SETTINGS
 
@@ -9,7 +13,7 @@ Copy link https://github.com/zubroid/heroku-buildpack-image-optims.git and put i
 
 ## YOUR PROJECT'S CONFIG
 
-Create a config file with "image-optimizer-buildpack.config" name and following content: 
+Create a config file with `image-optimizer-buildpack.config` name and following content: 
 
 ```sh
 OPTIPNG_VER="0.7.6"
