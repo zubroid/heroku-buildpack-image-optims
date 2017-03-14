@@ -26,8 +26,8 @@ if $BUILD_IT; then
   cd $TMP_DIR
 
   echo "Download sources:"
-  wget -q --show-progress $OPTIPNG_DOWNLOAD_URL
-  wget -q --show-progress $JPEGOPTIM_DOWNLOAD_URL
+  wget --progress=bar:force $OPTIPNG_DOWNLOAD_URL
+  wget --progress=bar:force $JPEGOPTIM_DOWNLOAD_URL
 
   tar zxf "optipng-${OPTIPNG_VER}.tar.gz"
   tar zxf "jpegoptim-${JPEGOPTIM_VER}.tar.gz"
